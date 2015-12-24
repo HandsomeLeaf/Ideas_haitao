@@ -6,11 +6,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Repository;
 
 import cn.edu.zju.cst.ideas.dao.ISiteDao;
-import cn.edu.zju.cst.ideas.domain.Type;
-import cn.edu.zju.cst.ideas.service.ITypeService;
+import cn.edu.zju.cst.ideas.domain.Site;
+import cn.edu.zju.cst.ideas.service.ISiteService;
 
 @Repository
-public class SiteService extends BaseService<Type> implements ITypeService{
+public class SiteService extends BaseService<Site> implements ISiteService{
 	
 	@Resource
 	private ISiteDao siteDao;

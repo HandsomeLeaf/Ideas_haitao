@@ -2,19 +2,15 @@ package cn.edu.zju.cst.ideas.service.impl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Repository;
-
 import cn.edu.zju.cst.ideas.dao.IBaseDao;
 import cn.edu.zju.cst.ideas.domain.PageBean;
 import cn.edu.zju.cst.ideas.service.IBaseService;
 import cn.edu.zju.cst.ideas.util.QueryHelper;
 
-@Repository
+
 public class BaseService<T> implements IBaseService<T> {
   
-	@Resource
+	
 	private IBaseDao<T> basedao;
 	
 	public IBaseDao getBasedao() {

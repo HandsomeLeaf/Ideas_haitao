@@ -26,6 +26,7 @@
 <!-- menu part -->
 <div id="menu">
 	<ul>
+<!--  
 		<s:iterator value="categoryDetailList" id="categoryCol">
 		<li><a href="#"><s:property value="key"/></a>
 			<div>
@@ -41,5 +42,18 @@
 			</div>
 		</li>
 		</s:iterator>
+-->
+		 <s:iterator value="#request.typeList" var='item'>
+		 <li>
+		 	<div>
+		 		item.type_name
+		 	</div>
+		 </li>
+		 </s:iterator>
+
+ 
+
+
+		 
 	</ul>
 </div>

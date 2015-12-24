@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import cn.edu.zju.cst.ideas.dao.IBaseDao;
 import cn.edu.zju.cst.ideas.domain.PageBean;

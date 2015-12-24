@@ -1,7 +1,13 @@
 package cn.edu.zju.cst.ideas.action;
 
+//import com.opensymphony.xwork2.ActionContext;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
+
+import cn.edu.zju.cst.ideas.domain.Type;
+import cn.edu.zju.cst.ideas.service.ITypeService;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -15,6 +21,17 @@ public class HeaderAction extends ActionSupport{
 	
 	//private Long parentId;
 
+	@Resource
+	private ITypeService typeService;
+	
+	public ITypeService getTypeService() {
+		return typeService;
+	}
+
+	public void setTypeService(ITypeService typeService) {
+		this.typeService = typeService;
+	}
+
 	public String header() {
 		
 //		Map<String, List<Map<Integer, String>>> categoryDetailMap = categoryDetailService.categoryDetailMap();
@@ -22,13 +39,17 @@ public class HeaderAction extends ActionSupport{
 //		ActionContext.getContext().put("categoryDetailList", categoryDetailMap);
 		
 //		HashMap<String, String[]> menuList = new HashMap<String, String[]>();
-//		menuList.put("»¤·ô", new String[] { "ÃæÄ¤", "½àÃæ", "±£ÊªËª" });
-//		menuList.put("ÏãË®", new String[] { "ÃæÄ¤", "½àÃæ", "±£ÊªËª" });
-//		menuList.put("ÉíÌå»¤Àí", new String[] { "ÃæÄ¤", "½àÃæ", "±£ÊªËª" });
-//		menuList.put("ÄÐÊ¿»¤Àí", new String[] { "ÃæÄ¤", "½àÃæ", "±£ÊªËª" });
+//		menuList.put("ï¿½ï¿½ï¿½ï¿½", new String[] { "ï¿½ï¿½Ä¤", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ÊªËª" });
+//		menuList.put("ï¿½ï¿½Ë®", new String[] { "ï¿½ï¿½Ä¤", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ÊªËª" });
+//		menuList.put("ï¿½ï¿½ï¿½å»¤ï¿½ï¿½", new String[] { "ï¿½ï¿½Ä¤", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ÊªËª" });
+//		menuList.put("ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½", new String[] { "ï¿½ï¿½Ä¤", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ÊªËª" });
 //		ActionContext actionContext=ActionContext.getContext();
 //		HttpServletRequest request=(HttpServletRequest)actionContext.get(ServletActionContext.HTTP_REQUEST);
 //        request.setAttribute("menuList",menuList);
+		
+		List<Type> typeList = typeService.findAll();
+		Map<String,Object> request =(Map<String,Object>)  ActionContext.getContext().get("request");
+		request.put("typeList", typeList);
 		return "header";
     }
 
