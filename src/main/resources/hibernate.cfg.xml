@@ -13,12 +13,10 @@
 	<property name="hibernate.format_sql">true</property>
 
 	<!-- 导入映射文件 -->
-	<mapping class="cn.edu.zju.cst.ideas.domain.test" />
-	<mapping class="cn.edu.zju.cst.ideas.domain.Employee" />
+	
 	<mapping class="cn.edu.zju.cst.ideas.domain.Brands" />
 	<mapping class="cn.edu.zju.cst.ideas.domain.Comment" />
 	<mapping class="cn.edu.zju.cst.ideas.domain.Goods" />
-	<mapping class="cn.edu.zju.cst.ideas.domain.Site_good" />
 	<mapping class="cn.edu.zju.cst.ideas.domain.Site" />
 	<mapping class="cn.edu.zju.cst.ideas.domain.Type" />
 	

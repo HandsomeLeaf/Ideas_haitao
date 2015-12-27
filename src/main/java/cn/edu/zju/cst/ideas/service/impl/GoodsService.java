@@ -21,4 +21,16 @@ public class GoodsService extends BaseService<Goods> implements IGoodsService{
 	public void setGoodsDao(IGoodsDao goodsDao) {
 		this.goodsDao = goodsDao;
 	}
+
+	@Override
+	public int getGoodsCount(int typeId) {
+		
+		return 0;
+	}
+
+	@Override
+	public int getAveragePrice(int typeId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

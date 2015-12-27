@@ -18,6 +18,7 @@ public class HeaderAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+//	private List<Type> typeList;
 	
 	//private Long parentId;
 
@@ -48,8 +49,13 @@ public class HeaderAction extends ActionSupport{
 //        request.setAttribute("menuList",menuList);
 		
 		List<Type> typeList = typeService.findAll();
-		Map<String,Object> request =(Map<String,Object>)  ActionContext.getContext().get("request");
-		request.put("typeList", typeList);
+//		Map<String,Object> request =(Map<String,Object>)  ActionContext.getContext().get("request");
+		for(Type item : typeList)
+		{
+			System.out.println(item.getType_name());
+		}
+		ActionContext.getContext().put("typeList", typeList);
+//		request.put("typeList", typeList);
 		return "header";
     }
 

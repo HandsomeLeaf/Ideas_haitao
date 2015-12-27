@@ -2,7 +2,9 @@ package cn.edu.zju.cst.ideas.action;
 
 import java.io.IOException;
 
-import com.opensymphony.xwork2.ActionContext;
+import javax.annotation.Resource;
+
+import cn.edu.zju.cst.ideas.service.IGoodsService;
 
 
 public class CategoryAction{
@@ -13,10 +15,14 @@ public class CategoryAction{
 	private static final long serialVersionUID = 1L;
 	private int typeId;
 
+	@Resource
+	private IGoodsService goodService;
+	
 	public String category() throws IOException{
 		
 //		Category category = categoryService.getCategoryById(typeId);
 //		ActionContext.getContext().put("category", category);
+		
 
 		return "category";
 	}

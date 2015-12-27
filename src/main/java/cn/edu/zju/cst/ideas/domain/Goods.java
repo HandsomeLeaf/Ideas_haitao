@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Goods")
+@Table(name="goodsinfo")
 public class Goods {
 	
 	@Id
@@ -17,6 +17,7 @@ public class Goods {
 	private String goods_name;
 	private int sites_id;
 	private int brand_id;
+	private int type_id;
 	private String goods_standard;
 	private String producting_area;
 	private String composition;
@@ -34,6 +35,41 @@ public class Goods {
 	private String tariffs_detail;
 	private String goods_picture;
 	private Date crawling_time;
+	private String good_keys;
+	private String tag;
+	private String application_people;
+	@Column(name="goods_url",length = 500)
+	private String goods_url;
+	public int getType_id() {
+		return type_id;
+	}
+	public void setType_id(int type_id) {
+		this.type_id = type_id;
+	}
+	public String getGood_keys() {
+		return good_keys;
+	}
+	public void setGood_keys(String good_keys) {
+		this.good_keys = good_keys;
+	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	public String getApplication_people() {
+		return application_people;
+	}
+	public void setApplication_people(String application_people) {
+		this.application_people = application_people;
+	}
+	public String getGoods_url() {
+		return goods_url;
+	}
+	public void setGoods_url(String goods_url) {
+		this.goods_url = goods_url;
+	}
 	public int getGoods_id() {
 		return goods_id;
 	}

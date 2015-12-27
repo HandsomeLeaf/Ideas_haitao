@@ -10,11 +10,12 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Type")
+@Table(name="typeinfo")
 public class Type {
 
 	@Id
 	private int type_id;
+	
 	private String type_name;
 
 	@OneToMany(targetEntity=Goods.class)

@@ -7,12 +7,29 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Comment")
+@Table(name="comment")
 public class Comment {
 
 	@Id
 	private int comment_id;
-	private int goos_id;
+	public int getGoods_id() {
+		return goods_id;
+	}
+
+	public void setGoods_id(int goods_id) {
+		this.goods_id = goods_id;
+	}
+
+	public int getGood_id() {
+		return good_id;
+	}
+
+	public void setGood_id(int good_id) {
+		this.good_id = good_id;
+	}
+
+	private int goods_id;
+	private int good_id;
 	private Date comments_time;
 	private Date crawling_time;
 	private String comments_content;
@@ -27,11 +44,11 @@ public class Comment {
 	}
 
 	public int getGoos_id() {
-		return goos_id;
+		return goods_id;
 	}
 
 	public void setGoos_id(int goos_id) {
-		this.goos_id = goos_id;
+		this.goods_id = goos_id;
 	}
 
 	public Date getComments_time() {

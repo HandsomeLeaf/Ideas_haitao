@@ -1,6 +1,9 @@
+<%@page import="cn.edu.zju.cst.ideas.domain.Type"  %>
+<%@page import="java.util.List"  %>
 <%
 	String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -41,8 +44,8 @@
 			</div>
 		</li>
 		</s:iterator>	-->	
-		<s:iterator value="request.typeList" id="type">
-		<li><s:a action="category.action?typeId=%{type.getType_id()}"><s:property value="type.getType_name()"/></s:a>
+		<s:iterator value="typeList" id="type">
+		<li><s:a action="category.action?typeId=type_id"><s:property value="type_name"/></s:a>
 		</li>
 		</s:iterator>
 	</ul>

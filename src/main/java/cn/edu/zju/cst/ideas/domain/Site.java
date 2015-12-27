@@ -7,14 +7,15 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Site")
+@Table(name="site")
 public class Site {
 
 	@Id
 	private int sites_id;
-	private String site_url;
+	private String sites_url;
 	private String sites_logo;
 	private String sites_chinese_name;
+	
 
 	public int getSites_id() {
 		return sites_id;
@@ -25,11 +26,11 @@ public class Site {
 	}
 
 	public String getSite_url() {
-		return site_url;
+		return sites_url;
 	}
 
 	public void setSite_url(String site_url) {
-		this.site_url = site_url;
+		this.sites_url = site_url;
 	}
 
 	public String getSites_logo() {
