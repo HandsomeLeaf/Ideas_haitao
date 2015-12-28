@@ -47,6 +47,9 @@
 		<action name="search" class="cn.edu.zju.cst.ideas.action.SearchAction" method="search">
 			<result name="search">/WEB-INF/pages/searchresult.jsp</result>
 		</action>
+		<action name="category" class="cn.edu.zju.cst.ideas.action.CategoryAction" method="category">
+			<result name="category">/WEB-INF/pages/categories.jsp</result>
+		</action>
 		<!--  
 		<action name="product" class="cn.edu.zju.cst.ideas.action.ProductAction" method="product">
 			<result name="product">/WEB-INF/pages/product.jsp</result>

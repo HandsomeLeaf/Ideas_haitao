@@ -1,5 +1,7 @@
 package cn.edu.zju.cst.ideas.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Repository;
@@ -32,5 +34,12 @@ public class GoodsService extends BaseService<Goods> implements IGoodsService{
 	public int getAveragePrice(int typeId) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<Goods> getGoodLists(String searchContext) {
+		List<Goods> goodLists = goodsDao.getGoodLists(searchContext);
+		
+		return goodLists;
 	}
 }
