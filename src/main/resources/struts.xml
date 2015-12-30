@@ -61,7 +61,8 @@
 		<action name="jsonTest" class="cn.edu.zju.cst.ideas.action.CategoryAction" method="categoryJson">
 		</action> 
 			-->
-		
+		<action name="jsonTest" class="cn.edu.zju.cst.ideas.action.CategoryAction" method="categoryJson">
+		</action> 
 	</package>
 
 

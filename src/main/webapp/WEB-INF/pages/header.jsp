@@ -44,8 +44,8 @@
 			</div>
 		</li>
 		</s:iterator>	-->	
-		<s:iterator value="typeList" id="type">
-		<li><s:a action="category.action?typeId=type_id"><s:property value="type_name"/></s:a>
+		<s:iterator value="typeList" var="type">
+		<li><s:a action="category.action?typeId=%{type_id}"><s:property value="type_name"/></s:a>
 		</li>
 		</s:iterator>
 	</ul>
