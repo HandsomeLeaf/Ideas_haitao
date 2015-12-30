@@ -9,82 +9,125 @@ import javax.annotation.Resource;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
 
 import cn.edu.zju.cst.ideas.dao.IBaseDao;
-import cn.edu.zju.cst.ideas.domain.PageBean;
-import cn.edu.zju.cst.ideas.util.QueryHelper;
+import cn.edu.zju.cst.ideas.utils.PageBean;
+import cn.edu.zju.cst.ideas.utils.QueryHelper;
 
 @SuppressWarnings("unchecked")
-public class BaseDaoImpl<T> implements IBaseDao<T>{
-	
+public class BaseDaoImpl<T> implements IBaseDao<T> {
+
 	@Resource
 	protected SessionFactory sessionFactory;
 	private Class<T> clazz;
-	
-	public BaseDaoImpl(){
+
+	public BaseDaoImpl() {
 		ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
 		this.clazz = (Class<T>) pt.getActualTypeArguments()[0];
-		
 	}
-	
 
-	/**
-	 * get session of current Thread
-	 * @return
-	 */
 	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
-	public T getById(Integer id) {
-		if (id == null){
+
+	@Override
+	public <T> T getById(Integer id) {
+		// TODO Auto-generated method stub
+		if (id == null) {
 			return null;
-		}else {
+		} else {
 			return (T) getSession().get(clazz, id);
 		}
+
 	}
 
-	public List<T> getByIds(Long[] ids) {
+	@Override
+	public List<T> getDomainsByTypeId(String typeId) {
+		// TODO Auto-generated method stub
+		return sessionFactory.getCurrentSession()
+				.createQuery(//
+						"FROM " + clazz.getSimpleName() + "c WHERE c.Id = :typeId ")//
+				.setParameter("typeId", typeId)//
+				.list();
+
+	}
+
+	@Override
+	public <T> List<T> getByIds(Long[] ids) {
+		// TODO Auto-generated method stub
 		if (ids == null || ids.length == 0) {
 			return Collections.EMPTY_LIST;
 		} else {
-			return getSession().createQuery(//
-					"FROM " + clazz.getSimpleName() + " WHERE id IN (:ids)")//
+			return getSession()
+					.createQuery(//
+							"FROM " + clazz.getSimpleName() + " WHERE id IN (:ids)")//
 					.setParameterList("ids", ids)//
 					.list();
 		}
 	}
 
-	public List<T> findAll() {
-		return getSession().createQuery(//
-				"FROM " + clazz.getSimpleName())//
+	@Override
+	public List<T> findTopDomainList() {
+		// TODO Auto-generated method stub
+		return sessionFactory.getCurrentSession()
+				.createQuery(//
+						"FROM " + clazz.getSimpleName() + " c WHERE c.parent IS NULL")//
 				.list();
 	}
 
+	@Override
+	public <T> T getByName(String name) {
+		// TODO Auto-generated method stub
+		return (T) sessionFactory.getCurrentSession()
+				.createQuery(//
+						"FROM " + clazz.getSimpleName() + " c WHERE c.name = :name")//
+				.setParameter(0, name)//
+				.list().get(0);
+	}
+
+	@Override
+	public List<T> findSubDomainList() {
+		// TODO Auto-generated method stub
+		return sessionFactory.getCurrentSession()
+				.createQuery(//
+						"FROM" + clazz.getSimpleName() + " c WHERE c.parent IS NOT NULL")//
+				.list();
+	}
+
+	@Override
+	public <T> List<T> findAll() {
+		// TODO Auto-generated method stub
+		return getSession()
+				.createQuery(//
+						"FROM " + clazz.getSimpleName())//
+				.list();
+	}
+
+	@Override
 	public PageBean getPageBean(int pageNum, int pageSize, QueryHelper queryHelper) {
-		//è·å–æ‰€æœ‰å‚æ•°å¯¹è±¡
+		// TODO Auto-generated method stub
+		// ²ÎÊıÁĞ±í
 		List<Object> parameters = queryHelper.getParameters();
 
-		// è·å–æŸ¥è¯¢è¯­å¥
-		Query listQuery = getSession().createQuery(queryHelper.getListQueryHql()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
-		if (parameters != null) { // ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½
+		// ²éÑ¯±¾Ò³µÄÊı¾İÁĞ±í
+		Query listQuery = getSession().createQuery(queryHelper.getListQueryHql()); // ´´½¨²éÑ¯¶ÔÏó
+		if (parameters != null) { // ÉèÖÃ²ÎÊı
 			for (int i = 0; i < parameters.size(); i++) {
 				listQuery.setParameter(i, parameters.get(i));
 			}
 		}
 		listQuery.setFirstResult((pageNum - 1) * pageSize);
 		listQuery.setMaxResults(pageSize);
-		List list = listQuery.list(); // Ö´ï¿½Ğ²ï¿½Ñ¯
+		List list = listQuery.list(); // Ö´ĞĞ²éÑ¯
 
-		// ï¿½ï¿½Ñ¯ï¿½Ü¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
+		// ²éÑ¯×Ü¼ÇÂ¼ÊıÁ¿
 		Query countQuery = getSession().createQuery(queryHelper.getCountQueryHql());
-		if (parameters != null) { // ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½
+		if (parameters != null) { // ÉèÖÃ²ÎÊı
 			for (int i = 0; i < parameters.size(); i++) {
 				countQuery.setParameter(i, parameters.get(i));
 			}
 		}
-		Long count = (Long) countQuery.uniqueResult(); // Ö´ï¿½Ğ²ï¿½Ñ¯
+		Long count = (Long) countQuery.uniqueResult(); // Ö´ĞĞ²éÑ¯
 
 		return new PageBean(pageNum, pageSize, count.intValue(), list);
 	}

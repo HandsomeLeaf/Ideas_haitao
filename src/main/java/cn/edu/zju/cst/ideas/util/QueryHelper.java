@@ -1,4 +1,4 @@
-package cn.edu.zju.cst.ideas.util;
+package cn.edu.zju.cst.ideas.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,19 +6,21 @@ import java.util.List;
 import com.opensymphony.xwork2.ActionContext;
 
 import cn.edu.zju.cst.ideas.dao.IBaseDao;
-import cn.edu.zju.cst.ideas.domain.PageBean;
 
-
+/**
+ * 用于辅助HQL的拼接
+ *
+ */
 public class QueryHelper {
 	
-	private String fromClause; // FROM瀛愬彞
-	private String whereClause = ""; // Where瀛愬彞
-	private String orderByClause = ""; // OrderBy瀛愬彞
+	private String fromClause; // FROM子句
+	private String whereClause = ""; // Where子句
+	private String orderByClause = ""; // OrderBy子句
 	
-	private List<Object> parameters = new ArrayList<Object>(); // 鍙傛暟瀵硅薄闆嗗悎
+	private List<Object> parameters = new ArrayList<Object>(); // 参数列表
 	
 	/**
-	 * 鏍规嵁绫诲瀷鍒濆鍖朏rom
+	 * 生成From子句
 	 * 
 	 * @param clazz
 	 * @param alias
@@ -29,20 +31,20 @@ public class QueryHelper {
 	}
 	
 	/**
-	 * 鎷兼帴where瀛愬彞
+	 * 拼接Where子句
 	 * 
 	 * @param condition
 	 * @param params
 	 */
 	public QueryHelper addCondition(String condition, Object... params) {
-		
+		// 拼接
 		if (whereClause.length() == 0) {
 			whereClause = " WHERE " + condition;
 		} else {
 			whereClause += " AND " + condition;
 		}
 
-		
+		// 参数
 		if (params != null) {
 			for (Object p : params) {
 				parameters.add(p);
@@ -52,7 +54,13 @@ public class QueryHelper {
 		return this;
 	}
 	
-	
+	/**
+	 * 如果第一个参数为true，则拼接Where子句
+	 * 
+	 * @param append
+	 * @param condition
+	 * @param params
+	 */
 	public QueryHelper addCondition(boolean append, String condition, Object... params) {
 		if (append) {
 			addCondition(condition, params);
@@ -61,10 +69,12 @@ public class QueryHelper {
 	}
 	
 	/**
-	 * 鎷兼帴orderby瀛愬彞
+	 * 拼接OrderBy子句
+	 * 
 	 * @param propertyName
+	 *            参与排序的属性名
 	 * @param asc
-	 * @return
+	 *            true表示升序，false表示降序
 	 */
 	public QueryHelper addOrderProperty(String propertyName, boolean asc) {
 		if (orderByClause.length() == 0) {
@@ -75,7 +85,13 @@ public class QueryHelper {
 		return this;
 	}
 
-	
+	/**
+	 * 如果第一个参数为true，则拼接OrderBy子句
+	 * 
+	 * @param append
+	 * @param propertyName
+	 * @param asc
+	 */
 	public QueryHelper addOrderProperty(boolean append, String propertyName, boolean asc) {
 		if (append) {
 			addOrderProperty(propertyName, asc);
@@ -84,7 +100,8 @@ public class QueryHelper {
 	}
 	
 	/**
-	 * 杩斿洖瀹屾暣鐨剆qlList鏌ヨ璇彞
+	 * 获取生成的用于查询数据列表的HQL语句
+	 * 
 	 * @return
 	 */
 	public String getListQueryHql() {
@@ -92,7 +109,8 @@ public class QueryHelper {
 	}
 
 	/**
-	 * 鑾峰彇璁＄畻count鐨凥QL璇彞
+	 * 获取生成的用于查询总记录数的HQL语句
+	 * 
 	 * @return
 	 */
 	public String getCountQueryHql() {
@@ -100,7 +118,8 @@ public class QueryHelper {
 	}
 
 	/**
-	 * 杩斿洖鎵�鏈夌殑鍙傛暟闆嗗悎
+	 * 获取HQL中的参数值列表
+	 * 
 	 * @return
 	 */
 	public List<Object> getParameters() {
@@ -108,7 +127,7 @@ public class QueryHelper {
 	}
 
 	/**
-	 * 锟斤拷询锟斤拷页锟斤拷息锟斤拷锟斤拷锟脚碉拷值栈栈锟斤拷
+	 * 查询分页信息，并放到值栈栈顶
 	 * 
 	 * @param service
 	 * @param pageNum
