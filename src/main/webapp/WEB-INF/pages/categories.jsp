@@ -8,7 +8,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path;
-	String typeId=(String)request.getAttribute("typeId");
+	
 %>
 <head>
 <link rel="stylesheet" type="text/css"
@@ -414,8 +414,7 @@
 						} ]
 					} ]
 				};
-				var url='${pageContext.request.contextPath}/test.action?typeId=<%=typeId%>';
-				alert(url);
+				var url='${pageContext.request.contextPath}/jsonTest.action?typeId=<%=request.getAttribute("typeId")%>';
 					//通过Ajax获取数据 
 		            $.ajax({  
 		                type : "post",  
@@ -429,11 +428,20 @@
 		                    	priceTrendOption.xAxis[0].data = result.priceTime;  
 		                    	priceTrendOption.series[0].data = result.priceData;
 		                    	salesTrendOption.xAxis[0].data = result.salesTime;  
-		                    	salesTrendOption.series[0].data = result.salesData;
-		                    	productRecommendOption.series[0].data.name=result.productName;
-		                    	productRecommendOption.series[0].data.value=result.productSales;
-		                    	blandRecommendOption.series[0].data.name=result.blandName;
-		                    	blandRecommendOption.series[0].data.value=result.blandSales;
+		                    	salesTrendOption.series[0].data = result.productSales;
+		                    	
+		                    	alert(result.productName.length);
+		                    	
+		                    	for(var i=0;i<result.productName.length;i++){
+		                    		productRecommendOption.series[0].data[i].name=result.productName[i].substring(0,10);
+			                    	productRecommendOption.series[0].data[i].value=result.productSales[i];
+		                    	}
+		                    	
+		                    	for(var i=0;i<result.brandName.length;i++){
+		                    		blandRecommendOption.series[0].data[i].name=result.brandName[i];
+			                    	blandRecommendOption.series[0].data[i].value=result.brandSales[i];
+		                    	}
+		                    	
 		                    	 
 		                    	priceDistributeChart.hideLoading();  
 		                    	priceDistributeChart.setOption(priceDistributeOption); 
@@ -472,7 +480,7 @@
 				<span style="font-size: 16px;">&nbsp;&nbsp;&nbsp;&nbsp;产品总数：<span
 					style="color: #e83d02;"><s:property value="productCount"/></span></span> <br> <span
 					style="font-size: 16px;">&nbsp;&nbsp;&nbsp;&nbsp;平均价格：<span
-					style="color: #e83d02;"><s:property value="AveragePrice"/></span></span>
+					style="color: #e83d02;"><s:property value="averagePrice"/></span></span>
 				<hr style="border: 1px dotted #ccc" />
 				<div class="category-info" id="price-distribute"
 					style="height: 400px; width: 735px;"></div>
