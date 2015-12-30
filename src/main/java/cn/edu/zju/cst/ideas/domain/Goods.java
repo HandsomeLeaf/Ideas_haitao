@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -15,9 +17,23 @@ public class Goods {
 	@Id
 	private int goods_id;
 	private String goods_name;
-	private int sites_id;
-	private int brand_id;
-	private int type_id;
+	
+	@ManyToOne(targetEntity=Site.class)
+	@JoinColumn(name="sites_id")
+	private Site site;
+	//private int sites_id;
+	
+	@ManyToOne(targetEntity=Brands.class)
+	@JoinColumn(name="brand_id")
+	private Brands brands;
+	//private int brand_id;
+	
+	
+	@ManyToOne(targetEntity=Type.class)
+	@JoinColumn(name="type_id")
+	private Type type;
+	//private int type_id;
+	
 	private String goods_standard;
 	private String producting_area;
 	private String composition;
@@ -40,11 +56,25 @@ public class Goods {
 	private String application_people;
 	@Column(name="goods_url",length = 500)
 	private String goods_url;
-	public int getType_id() {
-		return type_id;
+	
+
+	public Site getSite() {
+		return site;
 	}
-	public void setType_id(int type_id) {
-		this.type_id = type_id;
+	public void setSite(Site site) {
+		this.site = site;
+	}
+	public Brands getBrands() {
+		return brands;
+	}
+	public void setBrands(Brands brands) {
+		this.brands = brands;
+	}
+	public Type getType() {
+		return type;
+	}
+	public void setType(Type type) {
+		this.type = type;
 	}
 	public String getGood_keys() {
 		return good_keys;
@@ -82,18 +112,7 @@ public class Goods {
 	public void setGoods_name(String goods_name) {
 		this.goods_name = goods_name;
 	}
-	public int getSites_id() {
-		return sites_id;
-	}
-	public void setSites_id(int sites_id) {
-		this.sites_id = sites_id;
-	}
-	public int getBrand_id() {
-		return brand_id;
-	}
-	public void setBrand_id(int brand_id) {
-		this.brand_id = brand_id;
-	}
+	
 	public String getGoods_standard() {
 		return goods_standard;
 	}
@@ -190,5 +209,17 @@ public class Goods {
 	public void setCrawling_time(Date crawling_time) {
 		this.crawling_time = crawling_time;
 	}
+	@Override
+	public String toString() {
+		return "Goods [goods_id=" + goods_id + ", goods_name=" + goods_name + ", site=" + site.getSites_chinese_name() + ", brands=" + brands.getBrand_name()
+				+ ", type=" + type.getType_name() + ", goods_standard=" + goods_standard + ", producting_area=" + producting_area
+				+ ", composition=" + composition + ", use=" + use + ", article_number=" + article_number + ", weight="
+				+ weight + ", tax_rate=" + tax_rate + ", goods_label=" + goods_label + ", level_workshop_price="
+				+ level_workshop_price + ", price=" + price + ", good_reputation_rating=" + good_reputation_rating
+				+ ", month_sale_number=" + month_sale_number + ", store_number=" + store_number + ", tariffs_detail="
+				+ tariffs_detail + ", goods_picture=" + goods_picture + ", crawling_time=" + crawling_time
+				+ ", good_keys=" + good_keys + ", tag=" + tag + ", application_people=" + application_people
+				+ ", goods_url=" + goods_url + "]";
+	}	
 	
 }

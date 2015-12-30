@@ -1,3 +1,4 @@
+
 package cn.edu.zju.cst.ideas.dao;
 
 import java.util.Date;
@@ -20,4 +21,7 @@ public interface IGoodsDao extends IBaseDao<Goods> {
 			List<Date> timeList);
 	public Map<String, Integer> getHotProductAndCount() ;
 	public Map<String, Integer> getHotBrandAndCount();
+	
+	public List<Goods> getGoodLists(String searchContext); 
 }
+

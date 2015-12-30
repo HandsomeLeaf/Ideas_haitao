@@ -1,3 +1,4 @@
+
 package cn.edu.zju.cst.ideas.service.impl;
 
 import java.math.BigDecimal;
@@ -126,5 +127,14 @@ public class GoodsService extends BaseService<Goods> implements IGoodsService{
 		return getGoodsJson(0);
 	}
 	
+	@Override
+	public List<Goods> getGoodLists(String searchContext) {
+		List<Goods> goodLists = goodsDao.getGoodLists(searchContext);
+		return goodLists;
+	}
+	
 	
 }
+
+
+
