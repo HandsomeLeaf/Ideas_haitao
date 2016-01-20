@@ -70,45 +70,46 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
-			<div class="product-list">
-				<s:iterator value="productList" id="product">
+			 <s:iterator value="goodList" id="product">
+			 <div class="product-list">
+				
 					<div class="struct">
 						<div class="line">
-							<a href="#" class="image-link">
+							<a href="<s:property value="goods_url" />" class="image-link">
 								<div class="image">
-									<img
-										src="<%=basePath%>/images/ipod_touch_1-80x80.jpg"
+									<img style="width:95%; "
+										src="<s:property value="goods_picture" />"
 										title="Innisfree" alt="Innisfree" />
 								</div>
 							</a>
 							<div class="right">
-								<div class="price">
-									<s:property value="productId" />
-									元
+								<div class="name">
+								<a href="#"><s:property value="goods_name" /></a>
 								</div>
+								<div class="price">
+									价格：<s:property value="price" />元
+								</div>
+								<div class="description">
+								<span>品牌名称：</span>
+								<s:property value="brands.goods_brand_name" />								
+								<br>
+								<span>来源网站：</span>
+								<s:property value="site.sites_chinese_name" />
+							    </div>
 								<div class="cart combo">
-									<s:a action="product" title="Watch the Anaylysis">
+									<s:a action="product.action?goodsId=%{goods_id}" title="Watch the Anaylysis">
 										<span class="icon icon-compare">&nbsp;</span>
 									</s:a>
-									<a href="<s:property value="productUrl" />" title="Go to Purchase"> <span
+									<a href="<s:property value="goods_url" />" title="Go to Purchase"> <span
 										class="icon icon-basket">&nbsp;</span></a> <a
 										title="Add to Compare"> <span class="icon icon-wish">&nbsp;</span></a>
 								</div>
-							</div>
-							<div class="name">
-								<a href="#"><s:property value="productName" /></a>
-							</div>
-							<div class="description">
-								<span>品牌名称：</span>
-								<s:property value="blandName" />
-								<br>
-								<span>功&nbsp;&nbsp;效：</span>
-								<s:property value="productFunction" />
-							</div>
+							</div>														
 							<div class="clearfix"></div>
 						</div>
 
 					</div>
+					</div> 
 				</s:iterator>
 				<div class="clearfix"></div>
 				<div class="column">
@@ -116,7 +117,8 @@
 						<div class="results">Showing 1 to 6 of 6 (1 Pages)</div>
 					</div>
 				</div>
-			</div>
+			
+			
 		</div>
 	</div>
 	<br>

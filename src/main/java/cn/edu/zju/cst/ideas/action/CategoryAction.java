@@ -29,35 +29,14 @@ public class CategoryAction{
 	
 	public String category() throws IOException{
 		
-//		Category category = categoryService.getCategoryById(typeId);
-//		ActionContext.getContext().put("category", category);
 		CatagoryStatstic category = goodService.getCatagoryStatstic(typeId);
-		//ActionContext.getContext().put("category", category);
 		ActionContext.getContext().getValueStack().push(category);
 		
 		return "category";
 	}
 
-	
-	private class Person{
-		private String name;
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-		
-	}
 	public String categoryJson() throws IOException{
 		
-//		JSONObject jo = new JSONObject();
-//		jo.put("name","yeshuai");
-		//Person p = new Person();
-		//p.setName("yeshuai");
-		//String jsonString = JSON.toJSONString(p);
 		String jsonString = goodService.getGoodsJson();
 		HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE); 
 		response.setCharacterEncoding("UTF-8");

@@ -1,12 +1,9 @@
 package cn.edu.zju.cst.ideas.action;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -34,12 +31,19 @@ public class SearchAction extends ActionSupport{
 	}
 	public String search() {
         System.out.print("searchContext"+searchContext);
-        List<Goods> goodList = new ArrayList<>();
-        goodList = goodService.getGoodLists(searchContext);
-        ActionContext actionContext=ActionContext.getContext();
-		HttpServletRequest request=(HttpServletRequest)actionContext.get(ServletActionContext.HTTP_REQUEST);
-        request.setAttribute("goodList",goodList);
+        List<Goods> goodList = goodService.getGoodLists(searchContext);
+        Map<Integer, String> goods_pic = goodService.getGoodsJson(goodList);
+        
+        
+//        ActionContext actionContext=ActionContext.getContext();
+//		HttpServletRequest request=(HttpServletRequest)actionContext.get(ServletActionContext.HTTP_REQUEST);
+//        request.setAttribute("goodList",goodList);
+        
+        
         System.out.println(goodList.get(1));
+        ActionContext.getContext().put("goodList", goodList);
+        ActionContext.getContext().put("goods_pic", goods_pic);
+//        ActionContext.getContext().getValueStack().push(goods_pic);
 		return "search";
     }
 

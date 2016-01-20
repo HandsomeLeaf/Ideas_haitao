@@ -2,13 +2,13 @@ package cn.edu.zju.cst.ideas.dao;
 
 import java.util.List;
 
-import cn.edu.zju.cst.ideas.utils.PageBean;
-import cn.edu.zju.cst.ideas.utils.QueryHelper;
+import cn.edu.zju.cst.ideas.domain.PageBean;
+import cn.edu.zju.cst.ideas.util.QueryHelper;
 
 public interface IBaseDao<T> {
 
 	/**
-	 * °´id²éÑ¯
+	 * ï¿½ï¿½idï¿½ï¿½Ñ¯
 	 * 
 	 * @param id
 	 * @return
@@ -24,7 +24,7 @@ public interface IBaseDao<T> {
 	public <T> T getByName(String name);
 
 	/**
-	 * ²éÑ¯¶à¸öidµÄÄÚÈÝ
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param ids
 	 * @return
@@ -32,19 +32,19 @@ public interface IBaseDao<T> {
 	public <T> List<T> getByIds(Long[] ids);
 
 	/**
-	 * ²éÑ¯ËùÓÐ
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @return
 	 */
 	public <T> List<T> findAll();
 
 	/**
-	 * ¹«¹²µÄ²éÑ¯·ÖÒ³ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½Ñ¯ï¿½ï¿½Ò³ï¿½ï¿½Ï¢
 	 * 
 	 * @param pageNum
 	 * @param pageSize
 	 * @param queryHelper
-	 *            HQLÓï¾äÓë²ÎÊýÁÐ±í
+	 *            HQLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 	 * @return
 	 */
 	PageBean getPageBean(int pageNum, int pageSize, QueryHelper queryHelper);

@@ -2202,6 +2202,11 @@ form h2{
 	background: #f4f4f4;
     	border: 1px solid #BBBBBB;
 	box-shadow: 1px 1px 1px #FFFFFF inset;
+	width:48%;
+	margin-right:9px;
+	margin-left:9px;
+	float:left;
+	position:reative;
 }
 #tab-product-list {
 	margin-bottom: 20px;
@@ -2210,7 +2215,7 @@ form h2{
 .product-list .struct {
 	padding-left:15px;
 	padding-right:15px;
-	margin-bottom: 20px;
+	margin-bottom: 8px;
 }
 
 .product-list .struct:first-child {
@@ -2228,16 +2233,16 @@ form h2{
 }
 .product-list .right {
 	float: right;
-	margin-left: 15px;	
+	width:46%;
+	height:225px;	
 }
 .product-list > div + div {
 
 	padding-top: 16px;
 }
 .product-list .image {
-	margin-right: 15px;
-	padding-right: 10px;
 	float: left;
+	width:50%;
 }
 .product-list .image img {
 	display: block;
@@ -2286,6 +2291,8 @@ form h2{
 }
 .product-list .cart {
 	margin-bottom: 3px;
+	margin-top:30px;
+	margin-left:80px;
 }
 .product-list .wishlist, .product-list .compare {
 	margin-bottom: 3px;

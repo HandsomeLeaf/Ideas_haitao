@@ -1,4 +1,4 @@
-package cn.edu.zju.cst.ideas.utils;
+package cn.edu.zju.cst.ideas.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,21 +6,22 @@ import java.util.List;
 import com.opensymphony.xwork2.ActionContext;
 
 import cn.edu.zju.cst.ideas.dao.IBaseDao;
+import cn.edu.zju.cst.ideas.domain.PageBean;
 
 /**
- * ÓÃÓÚ¸¨ÖúHQLµÄÆ´½Ó
+ * ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½HQLï¿½ï¿½Æ´ï¿½ï¿½
  *
  */
 public class QueryHelper {
 	
-	private String fromClause; // FROM×Ó¾ä
-	private String whereClause = ""; // Where×Ó¾ä
-	private String orderByClause = ""; // OrderBy×Ó¾ä
+	private String fromClause; // FROMï¿½Ó¾ï¿½
+	private String whereClause = ""; // Whereï¿½Ó¾ï¿½
+	private String orderByClause = ""; // OrderByï¿½Ó¾ï¿½
 	
-	private List<Object> parameters = new ArrayList<Object>(); // ²ÎÊýÁÐ±í
+	private List<Object> parameters = new ArrayList<Object>(); // ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 	
 	/**
-	 * Éú³ÉFrom×Ó¾ä
+	 * ï¿½ï¿½ï¿½Fromï¿½Ó¾ï¿½
 	 * 
 	 * @param clazz
 	 * @param alias
@@ -31,20 +32,20 @@ public class QueryHelper {
 	}
 	
 	/**
-	 * Æ´½ÓWhere×Ó¾ä
+	 * Æ´ï¿½ï¿½Whereï¿½Ó¾ï¿½
 	 * 
 	 * @param condition
 	 * @param params
 	 */
 	public QueryHelper addCondition(String condition, Object... params) {
-		// Æ´½Ó
+		// Æ´ï¿½ï¿½
 		if (whereClause.length() == 0) {
 			whereClause = " WHERE " + condition;
 		} else {
 			whereClause += " AND " + condition;
 		}
 
-		// ²ÎÊý
+		// ï¿½ï¿½ï¿½ï¿½
 		if (params != null) {
 			for (Object p : params) {
 				parameters.add(p);
@@ -55,7 +56,7 @@ public class QueryHelper {
 	}
 	
 	/**
-	 * Èç¹ûµÚÒ»¸ö²ÎÊýÎªtrue£¬ÔòÆ´½ÓWhere×Ó¾ä
+	 * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªtrueï¿½ï¿½ï¿½ï¿½Æ´ï¿½ï¿½Whereï¿½Ó¾ï¿½
 	 * 
 	 * @param append
 	 * @param condition
@@ -69,12 +70,12 @@ public class QueryHelper {
 	}
 	
 	/**
-	 * Æ´½ÓOrderBy×Ó¾ä
+	 * Æ´ï¿½ï¿½OrderByï¿½Ó¾ï¿½
 	 * 
 	 * @param propertyName
-	 *            ²ÎÓëÅÅÐòµÄÊôÐÔÃû
+	 *            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param asc
-	 *            true±íÊ¾ÉýÐò£¬false±íÊ¾½µÐò
+	 *            trueï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½falseï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 	 */
 	public QueryHelper addOrderProperty(String propertyName, boolean asc) {
 		if (orderByClause.length() == 0) {
@@ -86,7 +87,7 @@ public class QueryHelper {
 	}
 
 	/**
-	 * Èç¹ûµÚÒ»¸ö²ÎÊýÎªtrue£¬ÔòÆ´½ÓOrderBy×Ó¾ä
+	 * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªtrueï¿½ï¿½ï¿½ï¿½Æ´ï¿½ï¿½OrderByï¿½Ó¾ï¿½
 	 * 
 	 * @param append
 	 * @param propertyName
@@ -100,7 +101,7 @@ public class QueryHelper {
 	}
 	
 	/**
-	 * »ñÈ¡Éú³ÉµÄÓÃÓÚ²éÑ¯Êý¾ÝÁÐ±íµÄHQLÓï¾ä
+	 * ï¿½ï¿½È¡ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½HQLï¿½ï¿½ï¿½
 	 * 
 	 * @return
 	 */
@@ -109,7 +110,7 @@ public class QueryHelper {
 	}
 
 	/**
-	 * »ñÈ¡Éú³ÉµÄÓÃÓÚ²éÑ¯×Ü¼ÇÂ¼ÊýµÄHQLÓï¾ä
+	 * ï¿½ï¿½È¡ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯ï¿½Ü¼ï¿½Â¼ï¿½ï¿½ï¿½HQLï¿½ï¿½ï¿½
 	 * 
 	 * @return
 	 */
@@ -118,7 +119,7 @@ public class QueryHelper {
 	}
 
 	/**
-	 * »ñÈ¡HQLÖÐµÄ²ÎÊýÖµÁÐ±í
+	 * ï¿½ï¿½È¡HQLï¿½ÐµÄ²ï¿½ï¿½ï¿½Öµï¿½Ð±ï¿½
 	 * 
 	 * @return
 	 */
@@ -127,7 +128,7 @@ public class QueryHelper {
 	}
 
 	/**
-	 * ²éÑ¯·ÖÒ³ÐÅÏ¢£¬²¢·Åµ½ÖµÕ»Õ»¶¥
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½Ò³ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Åµï¿½ÖµÕ»Õ»ï¿½ï¿½
 	 * 
 	 * @param service
 	 * @param pageNum

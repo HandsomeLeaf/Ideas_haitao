@@ -11,8 +11,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import cn.edu.zju.cst.ideas.dao.IBaseDao;
-import cn.edu.zju.cst.ideas.utils.PageBean;
-import cn.edu.zju.cst.ideas.utils.QueryHelper;
+import cn.edu.zju.cst.ideas.domain.PageBean;
+import cn.edu.zju.cst.ideas.util.QueryHelper;
 
 @SuppressWarnings("unchecked")
 public class BaseDaoImpl<T> implements IBaseDao<T> {
@@ -106,28 +106,28 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	@Override
 	public PageBean getPageBean(int pageNum, int pageSize, QueryHelper queryHelper) {
 		// TODO Auto-generated method stub
-		// ²ÎÊýÁÐ±í
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 		List<Object> parameters = queryHelper.getParameters();
 
-		// ²éÑ¯±¾Ò³µÄÊý¾ÝÁÐ±í
-		Query listQuery = getSession().createQuery(queryHelper.getListQueryHql()); // ´´½¨²éÑ¯¶ÔÏó
-		if (parameters != null) { // ÉèÖÃ²ÎÊý
+		// ï¿½ï¿½Ñ¯ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+		Query listQuery = getSession().createQuery(queryHelper.getListQueryHql()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
+		if (parameters != null) { // ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½
 			for (int i = 0; i < parameters.size(); i++) {
 				listQuery.setParameter(i, parameters.get(i));
 			}
 		}
 		listQuery.setFirstResult((pageNum - 1) * pageSize);
 		listQuery.setMaxResults(pageSize);
-		List list = listQuery.list(); // Ö´ÐÐ²éÑ¯
+		List list = listQuery.list(); // Ö´ï¿½Ð²ï¿½Ñ¯
 
-		// ²éÑ¯×Ü¼ÇÂ¼ÊýÁ¿
+		// ï¿½ï¿½Ñ¯ï¿½Ü¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
 		Query countQuery = getSession().createQuery(queryHelper.getCountQueryHql());
-		if (parameters != null) { // ÉèÖÃ²ÎÊý
+		if (parameters != null) { // ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½
 			for (int i = 0; i < parameters.size(); i++) {
 				countQuery.setParameter(i, parameters.get(i));
 			}
 		}
-		Long count = (Long) countQuery.uniqueResult(); // Ö´ÐÐ²éÑ¯
+		Long count = (Long) countQuery.uniqueResult(); // Ö´ï¿½Ð²ï¿½Ñ¯
 
 		return new PageBean(pageNum, pageSize, count.intValue(), list);
 	}
