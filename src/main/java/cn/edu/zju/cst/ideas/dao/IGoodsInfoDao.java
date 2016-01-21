@@ -7,4 +7,6 @@ public interface IGoodsInfoDao extends IBaseDao<GoodsInfo> {
 	public final static String SERVICE_NAME = "cn.edu.zju.cst.ideas.dao.GoodsInfoDao";
 	
 	public Goods getGoodByid(int id);
+
+	public String getGoodJson(int goodId);
 }

@@ -27,5 +27,10 @@ public class GoodsInfoService extends BaseService<Goods> implements IGoodsInfoSe
 	public Goods getGoodByid(int id) {
 		return goodsDao.getGoodByid(id);
 	}
+
+	@Override
+	public String getGoodsJson(int goodId) {
+		return goodsDao.getGoodJson(goodId);
+	}
 	
 }

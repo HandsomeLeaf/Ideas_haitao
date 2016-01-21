@@ -8,5 +8,6 @@ import cn.edu.zju.cst.ideas.domain.Goods;
 
 public interface IGoodsInfoService  {
 	public Goods getGoodByid(int id);
+	public String getGoodsJson(int goodId);
 }
 

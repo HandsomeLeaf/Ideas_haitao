@@ -169,9 +169,10 @@ public class TestDemo {
 	
 	@Test
 	public void test9(){
-		//GoodsInfoService service = new GoodsInfoService();
 		GoodsInfoDaoImpl dao = new GoodsInfoDaoImpl();
 		System.out.println(dao.getGoodByid(10).getGoods_id());
+		Map<Date,Float> map = dao.getPriceDataByTime(161);
+		
 	}
 	
 	
