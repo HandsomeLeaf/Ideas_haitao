@@ -120,76 +120,7 @@
 					} ]
 				};
 
-				//分数走势图
-				var scoreTrendChart = ec.init(document
-						.getElementById('score-trend'));
-				scoreTrendChart.showLoading({  
-	                text : "图表数据正在努力加载..."  
-	            }); 
-				var scoreTrendOption = {
-					title : {
-						text : '产品分数走势'
-					},
-					tooltip : {
-						trigger : 'axis'
-					},
-					legend : {
-						data : [ '评价分数' ]
-					},
-					toolbox : {
-						show : true,
-						feature : {
-							mark : {
-								show : true
-							},
-							dataView : {
-								show : true,
-								readOnly : false
-							},
-							magicType : {
-								show : true,
-								type : [ 'line', 'bar' ]
-							},
-							restore : {
-								show : true
-							},
-							saveAsImage : {
-								show : true
-							}
-						}
-					},
-					xAxis : [ {
-						type : 'category',
-						boundaryGap : false,
-						data : [ '周一', '周二', '周三', '周四', '周五', '周六', '周日' ]
-					} ],
-					yAxis : [ {
-						type : 'value',
-						axisLabel : {
-							formatter : '{value}'
-						}
-					} ],
-					series : [ {
-						name : '产品分数',
-						type : 'line',
-						data : [ 4.9, 4.9, 4.9, 4.8, 4.8, 4.8, 4.7 ],
-						markPoint : {
-							data : [ {
-								type : 'max',
-								name : '最高分数'
-							}, {
-								type : 'min',
-								name : '最低分数'
-							} ]
-						},
-						markLine : {
-							data : [ {
-								type : 'average',
-								name : '平均分数'
-							} ]
-						}
-					} ]
-				};
+				
 
 				//销量走势图
 				var salesTrendChart = ec.init(document
@@ -394,19 +325,21 @@
 	                    if (result) {  
 	                    	priceTrendOption.xAxis[0].data = result.priceTime;  
 	                    	priceTrendOption.series[0].data = result.priceData;
-	                    	scoreTrendOption.xAxis[0].data = result.scoreTime;  
-	                    	scoreTrendOption.series[0].data = result.scoreData;
 	                    	salesTrendOption.xAxis[0].data = result.salesTime;  
 	                    	salesTrendOption.series[0].data = result.salesData;
-	                    	productRecommendOption.series[0].data.name=result.productName;
-	                    	productRecommendOption.series[0].data.value=result.productSales;
-	                    	brandProductOption.series[0].data.name=result.blandName;
-	                    	brandProductOption.series[0].data.value=result.blandSales;
+	                    	
+	                    	for(var i=0;i<result.productName.length;i++){
+	                    		productRecommendOption.series[0].data[i].name=result.productName[i].substring(0,10);
+		                    	productRecommendOption.series[0].data[i].value=result.productSales[i];
+	                    	}
+	                    	
+	                    	for(var i=0;i<result.brandName.length;i++){
+	                    		blandRecommendOption.series[0].data[i].name=result.brandName[i];
+		                    	blandRecommendOption.series[0].data[i].value=result.brandSales[i];
+	                    	}
 	                    	 
 	                    	priceTrendChart.hideLoading();  
 	                    	priceTrendChart.setOption(priceTrendOption); 
-	                    	scoreTrendChart.hideLoading();  
-	                    	scoreTrendChart.setOption(scoreTrendOption);
 	                    	salesTrendChart.hideLoading();  
 	                    	salesTrendChart.setOption(salesTrendOption);
 	                    	productRecommendChart.hideLoading();  
@@ -418,7 +351,6 @@
 	                error : function(errorMsg) {  
 	                    alert("不好意思，大爷，图表请求数据失败啦!");  
 	                    priceTrendChart.hideLoading();
-	                    scoreTrendChart.hideLoading();
 	                    salesTrendChart.hideLoading();
 	                    productRecommendChart.hideLoading();
 	                    brandProductChart.hideLoading();
@@ -448,28 +380,30 @@
 			<div class="content-title">商品信息</div>
 			<div class="category-info" id="product-detail">
 				<div class="product-name">
-					<span><s:property value="productDetail.productBrandName"/></span><s:property value="productDetail.productName"/>
+					<span><s:property value="brands.goods_brand_name"/></span><s:property value="goods_name"/>
 				</div>
 				<div class="image">
-					<img src="<%=basePath%>/images/product_img.jpg" alt="Product" />
+					<img src="<s:property value="goods_picture" />" alt="Product" />
 				</div>
 				<div class="product-moredetail">
-					类别：<s:property value="productDetail.categoryName"/>/<s:property value="productDetail.typeName"/> <br>
+					类别：<s:property value="type.type_name"/> <br>
 					<hr style="border: 1px dotted #ccc" />
-					<br> <span style="font-size: 20px; color: #e83d02;"><s:property value="productDetail.productPrice"/></span>&nbsp;&nbsp;&nbsp;&nbsp;
-					<del><s:property value="productDetail.productOriginalPrice"/></del>
+					<br> <span style="font-size: 20px; color: #e83d02;"><s:property value="level_workshop_price"/></span>&nbsp;&nbsp;&nbsp;&nbsp;
+					<del><s:property value="price"/></del>
 					<br>
 					<hr style="border: 1px dotted #ccc" />
-					<br> 已购买人数<span style="color: #e83d02;"><s:property value="productDetail.productSalesNum"/></span>&nbsp;&nbsp;&nbsp;&nbsp;<s:property value="productDetail.productScore"/>(<s:property value="productDetail.productKoubeiNum"/>篇口碑/<s:property value="productDetail.productCommentNum"/>条评论）
+					<br> 已购买人数<span style="color: #e83d02;"><s:property value="month_sale_number"/></span>&nbsp;&nbsp;&nbsp;&nbsp;<s:property value="good_reputation_rating"/>分
 					<br>
 					<hr style="border: 1px dotted #ccc" />
-					<br> 功效：<s:property value="productDetail.productFunction"/> <br>适用人群：<s:property value="productDetail.productTargetUser"/> <br>规格：<s:property value="productDetail.productStandard"/>
-					<br>生产地：<s:property value="productDetail.productYiedly"/> <br>评分细节：<s:property value="productDetail.productScoreDetail"/> <br>肤质分布：<s:property value="productDetail.productSkinDistribute"/>
+					<br>发货形式：<s:property value="tag"/>
+					<br>货品编号：<s:property value="article_number"/> <br>适用人群：<s:property value="application_people"/> <br>规格：<s:property value="goods_standard"/>
+					<br>生产地：<s:property value="producting_area"/> <br>组成成分：<s:property value="composition"/> <br>来源网站：<s:property value="site.sites_chinese_name"/>
+					<br>税率：<s:property value="tax_rate"/><br>税收明细：<s:property value="tariffs_detail"/><br>商品标签：<s:property value="goods_label"/>
 					<br>
 					<hr style="border: 1px dotted #ccc" />
 					<br>
 					<div class="purchase-button">
-						<a href="<s:property value="productDetail.productUrl"/>" class="button" id="purchase-button1"><span>点击前往购买</span></a>
+						<a href="<s:property value="goods_url"/>" class="button" id="purchase-button1"><span>点击前往购买</span></a>
 					</div>
 
 				</div>
