@@ -13,7 +13,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import cn.edu.zju.cst.ideas.dao.impl.GoodsDaoImpl;
-import cn.edu.zju.cst.ideas.domain.CatagoryStatstic;
+import cn.edu.zju.cst.ideas.dao.impl.GoodsInfoDaoImpl;
 import cn.edu.zju.cst.ideas.service.impl.GoodsService;
 
 public class TestDemo {
@@ -167,7 +167,12 @@ public class TestDemo {
 		}
 	}
 	
-	
+	@Test
+	public void test9(){
+		//GoodsInfoService service = new GoodsInfoService();
+		GoodsInfoDaoImpl dao = new GoodsInfoDaoImpl();
+		System.out.println(dao.getGoodByid(10).getGoods_id());
+	}
 	
 	
 	

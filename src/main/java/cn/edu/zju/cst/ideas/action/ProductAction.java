@@ -4,7 +4,10 @@ import java.io.IOException;
 
 import javax.annotation.Resource;
 
-import cn.edu.zju.cst.ideas.service.IGoodsService;
+import com.opensymphony.xwork2.ActionContext;
+
+import cn.edu.zju.cst.ideas.domain.Goods;
+import cn.edu.zju.cst.ideas.service.IGoodsInfoService;
 
 public class ProductAction {
 	/**
@@ -13,18 +16,12 @@ public class ProductAction {
 	private static final long serialVersionUID = 1L;
 	private int goodsId;
 	@Resource
-	private IGoodsService goodService;
+	private IGoodsInfoService goodInfoService;
 	
-	public int getGoods_id() {
-		return goodsId;
-	}
-
-	public void setGoodsId(int goodsId) {
-		this.goodsId = goodsId;
-	}
 
 	public String product() throws IOException{
-		System.out.println(goodsId);
+		Goods productDetail = goodInfoService.getGoodByid(goodsId);
+		ActionContext.getContext().getValueStack().push(productDetail);
 		return "product";
 	}
 }

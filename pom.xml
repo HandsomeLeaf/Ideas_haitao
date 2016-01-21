@@ -20,6 +20,13 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- 数据库操作使用queryRunner-->
+		<dependency>
+		<groupId>commons-dbutils</groupId>
+		<artifactId>commons-dbutils</artifactId>
+		<version>1.6</version>
+		</dependency>
 		<!-- convention-plugin插件，使用了这个插件之后，就可以采用注解的方式配置Action -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
